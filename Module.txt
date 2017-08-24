@@ -1,0 +1,12 @@
+﻿Name: Locations
+AntiForgery: enabled
+Author: Moov2
+Website: https://github.com/moov2/Moov2.Orchard.Location
+Version: 0.1
+OrchardVersion: 1.10.2
+Description: Adds location fields to content types.
+Features:
+    Asmodee.Orchard.Locations:
+        Name: Location
+        Description: Adds location fields to content types.
+        Category: Content
