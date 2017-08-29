@@ -71,6 +71,11 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Drivers\LocationPartDriver.cs" />
+    <Compile Include="Handlers\LocationPartHandler.cs" />
+    <Compile Include="Migrations.cs" />
+    <Compile Include="Models\LocationPart.cs" />
+    <Compile Include="Models\LocationPartRecord.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -89,10 +94,11 @@
       <Private>false</Private>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Drivers\" />
-    <Folder Include="Models\" />
-    <Folder Include="Views\" />
+    <Content Include="Placement.info" />
+    <None Include="Views\EditorTemplates\Parts.Location.LocationPart.cshtml" />
+    <Content Include="Views\Parts.Location.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

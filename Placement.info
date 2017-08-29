@@ -1,0 +1,13 @@
+﻿<Placement>
+  <!-- available display shapes -->
+  
+  <!--
+  Parts_Location
+  -->
+  
+  <Place Parts_Location_Edit="Content:10"/>
+
+  <Match DisplayType="Detail">
+    <Place Parts_Location="Meta:1"/>
+  </Match>
+</Placement>
