@@ -77,8 +77,13 @@
     <Compile Include="Models\LocationPart.cs" />
     <Compile Include="Models\LocationPartRecord.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResourceManifest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\JavaScript\orchard.location.js" />
+    <Content Include="Scripts\orchard.location.js" />
+    <Content Include="Scripts\orchard.location.min.js" />
+    <Content Include="Styles\admin-location.css" />
     <Content Include="Web.config" />
     <Content Include="Module.txt" />
   </ItemGroup>
@@ -97,6 +102,11 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="Placement.info" />
+    <Content Include="Assets.json" />
+    <Content Include="Scripts\Web.config" />
+    <Content Include="Styles\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Views\EditorTemplates\Parts.Location.LocationPart.cshtml" />
     <Content Include="Views\Parts.Location.cshtml" />
   </ItemGroup>

@@ -1,56 +1,64 @@
 ﻿@model Moov2.Orchard.Location.Models.LocationPart
 
+@{
+    Script.Require("LocationJs");
+
+    Style.Require("LocationAdminStyle");
+}
+
 <h2>@T("Location")</h2>
 
-<fieldset>
+<a href="#" class="js-show-location-all">@T("Click to show all")</a>
+
+<fieldset class="js-location-field location-field @(string.IsNullOrEmpty(Model.Name) ? "location-admin--hidden" : "")">
     <label for="@Html.FieldIdFor(m => m.Name)">@T("Name")</label>
     @Html.TextBoxFor(m => m.Name, new { @class = "text" })
     <span class="hint">@T("Name of addressee (e.g. John Smith)")</span>
 </fieldset>
 
-<fieldset>
+<fieldset class="js-location-field location-field @(string.IsNullOrEmpty(Model.Company) ? " location-admin--hidden" : "" )">
     <label for="@Html.FieldIdFor(m => m.Company)">@T("Company")</label>
     @Html.TextBoxFor(m => m.Company, new { @class = "text" })
     <span class="hint">@T("Company name (e.g. Boxes Ltd.)")</span>
 </fieldset>
 
-<fieldset>
+<fieldset class="js-location-field location-field @(string.IsNullOrEmpty(Model.UnitApartment) ? " location-admin--hidden" : "" )">
     <label for="@Html.FieldIdFor(m => m.UnitApartment)">@T("Unit/Apartment")</label>
     @Html.TextBoxFor(m => m.UnitApartment, new { @class = "text" })
     <span class="hint">@T("Unit/Apartment name or number (e.g. Unit 2 / Flat B.)")</span>
 </fieldset>
 
-<fieldset>
+<fieldset class="js-location-field location-field @(string.IsNullOrEmpty(Model.NameOrNumber) ? " location-admin--hidden" : "" )">
     <label for="@Html.FieldIdFor(m => m.NameOrNumber)">@T("Name or Number")</label>
     @Html.TextBoxFor(m => m.NameOrNumber, new { @class = "text" })
     <span class="hint">@T("Building name or number (e.g. 8.)")</span>
 </fieldset>
 
-<fieldset>
+<fieldset class="js-location-field location-field @(string.IsNullOrEmpty(Model.Street) ? " location-admin--hidden" : "" )">
     <label for="@Html.FieldIdFor(m => m.Street)">@T("Street")</label>
     @Html.TextBoxFor(m => m.Street, new { @class = "text" })
     <span class="hint">@T("Street name (e.g. London Road.)")</span>
 </fieldset>
 
-<fieldset>
+<fieldset class="js-location-field location-field @(string.IsNullOrEmpty(Model.Postcode) ? " location-admin--hidden" : "" )">
     <label for="@Html.FieldIdFor(m => m.Postcode)">@T("Postcode")</label>
     @Html.TextBoxFor(m => m.Postcode, new { @class = "text" })
     <span class="hint">@T("Postcode/Zip code (e.g. AA11 1AA.)")</span>
 </fieldset>
 
-<fieldset>
+<fieldset class="js-location-field location-field @(string.IsNullOrEmpty(Model.Town) ? " location-admin--hidden" : "" )">
     <label for="@Html.FieldIdFor(m => m.Town)">@T("Town")</label>
     @Html.TextBoxFor(m => m.Town, new { @class = "text" })
     <span class="hint">@T("Town name (e.g. London.)")</span>
 </fieldset>
 
-<fieldset>
+<fieldset class="js-location-field location-field @(string.IsNullOrEmpty(Model.CountyState) ? " location-admin--hidden" : "" )">
     <label for="@Html.FieldIdFor(m => m.CountyState)">@T("County/State")</label>
     @Html.TextBoxFor(m => m.CountyState, new { @class = "text" })
     <span class="hint">@T("County/State name (e.g. Sussex.)")</span>
 </fieldset>
 
-<fieldset>
+<fieldset class="js-location-field location-field @(string.IsNullOrEmpty(Model.Country) ? " location-admin--hidden" : "" )">
     <label for="@Html.FieldIdFor(m => m.Country)">@T("Country")</label>
     @Html.TextBoxFor(m => m.Country, new { @class = "text" })
     <span class="hint">@T("Country name (e.g. United Kingdom.)")</span>
@@ -58,13 +66,15 @@
 
 <h3>@T("Coordinates")</h3>
 
-<fieldset>
+<a href="#" class="js-show-location-coordinates">@T("Click to show coordinates")</a>
+
+<fieldset class="js-location-field-coords location-field location-admin--hidden">
     <label for="@Html.FieldIdFor(m => m.Latitude)">@T("Latitude")</label>
     @Html.TextBoxFor(m => m.Latitude, new { @class = "text" })
     <span class="hint">@T("Latitude value (e.g. 51.508885.)")</span>
 </fieldset>
 
-<fieldset>
+<fieldset class="js-location-field-coords location-field location-admin--hidden">
     <label for="@Html.FieldIdFor(m => m.Longitude)">@T("Longitude")</label>
     @Html.TextBoxFor(m => m.Longitude, new { @class = "text" })
     <span class="hint">@T("Longitude value (e.g. -0.115470.)")</span>

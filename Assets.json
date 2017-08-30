@@ -1,1 +1,8 @@
-[]
+﻿[
+  {
+    "inputs": [
+      "Assets/JavaScript/orchard.location.js"
+    ],
+    "output": "Scripts/orchard.location.js"
+  }
+]
