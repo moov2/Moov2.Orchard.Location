@@ -26,7 +26,8 @@ namespace Moov2.Orchard.Location
                 );
 
             ContentDefinitionManager.AlterPartDefinition("LocationPart", builder => builder
-                .WithDescription("Adds location fields to a content type."));
+                .WithDescription("Adds location fields to a content type.")
+                .Attachable());
 
             return 1;
         }
