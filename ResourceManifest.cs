@@ -7,7 +7,7 @@ namespace Moov2.Orchard.Location
         public void BuildManifests(ResourceManifestBuilder builder)
         {
             builder.Add()
-                .DefineScript("LocationJs").SetUrl("orchard.location.min.js", "orchard.location.js");
+                .DefineScript("LocationJs").SetUrl("orchard.location.min.js", "orchard.location.js").SetDependencies("jQuery");
             builder.Add()
                 .DefineStyle("LocationAdminStyle").SetUrl("admin-location.css");
         }
