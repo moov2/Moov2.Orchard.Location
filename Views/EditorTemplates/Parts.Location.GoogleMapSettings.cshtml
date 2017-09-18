@@ -1,0 +1,11 @@
+﻿@model Moov2.Orchard.Location.Models.GoogleMapSettingsPart
+
+<fieldset>
+    <legend>@T("Google API")</legend>
+    <p>@T("Enter your API details below to use Google maps and other features. See the following link for details on how to get one:") <a href="https://developers.google.com/maps/documentation/javascript/get-api-key">https://developers.google.com/maps/documentation/javascript/get-api-key</a></p>
+    <div>
+        @Html.LabelFor(m => m.ApiKey, T("Google API Key"))
+        @Html.TextBoxFor(m => m.ApiKey, new { @class = "text-long" })
+        <span class="hint">@T("Google API Key used to show maps.")</span>
+    </div>
+</fieldset>

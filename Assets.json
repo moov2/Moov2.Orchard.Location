@@ -1,8 +1,20 @@
 ﻿[
   {
     "inputs": [
-      "Assets/JavaScript/orchard.location.js"
+      "Assets/js/orchard.location.admin.js"
+    ],
+    "output": "Scripts/orchard.location.admin.js"
+  },
+  {
+    "inputs": [
+      "Assets/js/orchard.location.js"
     ],
     "output": "Scripts/orchard.location.js"
+  },
+  {
+    "inputs": [
+      "Assets/less/orchard.location.less"
+    ],
+    "output": "Styles/orchard.location.css"
   }
 ]

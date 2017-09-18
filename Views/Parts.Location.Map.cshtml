@@ -1,0 +1,30 @@
+﻿
+@{
+    Style.Require("LocationStyle");
+    Script.Require("LocationJs").AtFoot();
+}
+
+<script>
+    function initMap@(Model.ContentItemId)() {
+        if (typeof (window.mapCallback) === 'function') {
+            window.mapCallback(@(Model.ContentItemId));
+        } else {
+            if (typeof (window.loadedMaps) === 'undefined') {
+                window.loadedMaps = [];
+            }
+            window.loadedMaps.push(@(Model.ContentItemId));
+        }
+    }
+</script>
+
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=@(Model.ApiKey)&callback=initMap@(Model.ContentItemId)">
+</script>
+
+<div class="location-map js-location-map--container" data-content-item-id="@Model.ContentItemId">
+    <input type="hidden" class="js-location-map--latitude" value="@Model.Latitude" />
+    <input type="hidden" class="js-location-map--longitude" value="@Model.Longitude" />
+
+    <div class="location-map--map js-location-map--map">
+    </div>
+</div>

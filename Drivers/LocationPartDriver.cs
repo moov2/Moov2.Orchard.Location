@@ -1,4 +1,6 @@
 ﻿using Moov2.Orchard.Location.Models;
+using Moov2.Orchard.Location.ViewModels;
+using Orchard;
 using Orchard.ContentManagement;
 using Orchard.ContentManagement.Drivers;
 using Orchard.ContentManagement.Handlers;
@@ -12,12 +14,13 @@ namespace Moov2.Orchard.Location.Drivers
         #endregion
 
         #region Dependencies
+        private readonly IWorkContextAccessor _workContextAccessor;
         #endregion
 
         #region Constructor
-        public LocationPartDriver()
+        public LocationPartDriver(IWorkContextAccessor workContextAccessor)
         {
-
+            _workContextAccessor = workContextAccessor;
         }
         #endregion
 
@@ -32,9 +35,18 @@ namespace Moov2.Orchard.Location.Drivers
         #region Display
         protected override DriverResult Display(LocationPart part, string displayType, dynamic shapeHelper)
         {
-            if ("Detailed".Equals(displayType))
-                return ContentShape("Parts_Location", () => shapeHelper.Parts_Location(part));
-            return null;
+            var locationShape = ContentShape("Parts_Location", () => shapeHelper.Parts_Location(part));
+            if (ShouldRenderMap(part))
+            {
+                return Combined(
+                        locationShape,
+                        ContentShape("Parts_Location_Map", () => shapeHelper.Parts_Location_Map(ViewModelForMap(part)))
+                    );
+            }
+            else
+            {
+                return locationShape;
+            }
         }
         #endregion
 
@@ -88,6 +100,38 @@ namespace Moov2.Orchard.Location.Drivers
 
         }
         #endregion
+        #endregion
+
+        #region Helpers
+        private string GetApiKey()
+        {
+            var googleMapSettings = _workContextAccessor.GetContext().CurrentSite.As<GoogleMapSettingsPart>();
+            return googleMapSettings?.ApiKey;
+        }
+
+        private bool ShouldRenderMap(LocationPart part)
+        {
+            float tester;
+            return part != null &&
+                part.ShowMap &&
+                !string.IsNullOrWhiteSpace(GetApiKey()) &&
+                !string.IsNullOrWhiteSpace(part.Latitude) &&
+                !string.IsNullOrWhiteSpace(part.Longitude) &&
+                float.TryParse(part.Latitude, out tester) &&
+                float.TryParse(part.Longitude, out tester);
+        }
+
+        private LocationMapViewModel ViewModelForMap(LocationPart part)
+        {
+            var model = new LocationMapViewModel
+            {
+                ApiKey = GetApiKey(),
+                ContentItemId = part.ContentItem.Id,
+                Latitude = part.Latitude,
+                Longitude = part.Longitude
+            };
+            return model;
+        }
         #endregion
     }
 }

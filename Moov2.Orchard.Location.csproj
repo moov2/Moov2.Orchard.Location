@@ -73,20 +73,28 @@
   <ItemGroup>
     <Compile Include="Constants.cs" />
     <Compile Include="Drivers\LocationPartDriver.cs" />
+    <Compile Include="Handlers\GoogleMapSettingsPartHandler.cs" />
     <Compile Include="Handlers\LocationPartHandler.cs" />
     <Compile Include="Migrations.cs" />
+    <Compile Include="Models\GoogleMapSettingsPart.cs" />
     <Compile Include="Models\LocationPart.cs" />
     <Compile Include="Models\LocationPartRecord.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResourceManifest.cs" />
     <Compile Include="Search\ILocationSearchParameters.cs" />
     <Compile Include="Search\LocationSearchHelpers.cs" />
+    <Compile Include="ViewModels\LocationMapViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\JavaScript\orchard.location.js" />
+    <Content Include="Assets\js\orchard.location.admin.js" />
+    <Content Include="Assets\js\orchard.location.js" />
+    <Content Include="Scripts\orchard.location.admin.js" />
+    <Content Include="Scripts\orchard.location.admin.min.js" />
     <Content Include="Scripts\orchard.location.js" />
     <Content Include="Scripts\orchard.location.min.js" />
     <Content Include="Styles\admin-location.css" />
+    <Content Include="Styles\orchard.location.css" />
+    <Content Include="Styles\orchard.location.min.css" />
     <Content Include="Web.config" />
     <Content Include="Module.txt" />
   </ItemGroup>
@@ -110,8 +118,11 @@
     <Content Include="Styles\Web.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Assets\less\orchard.location.less" />
+    <None Include="Views\EditorTemplates\Parts.Location.GoogleMapSettings.cshtml" />
     <None Include="Views\EditorTemplates\Parts.Location.LocationPart.cshtml" />
     <Content Include="Views\Parts.Location.cshtml" />
+    <Content Include="Views\Parts.Location.Map.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

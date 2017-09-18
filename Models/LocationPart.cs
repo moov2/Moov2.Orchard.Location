@@ -4,6 +4,7 @@ namespace Moov2.Orchard.Location.Models
 {
     public class LocationPart : ContentPart<LocationPartRecord>
     {
+        #region Record Properties
         public string Name { get { return Retrieve(x => x.Name); } set { Store(x => x.Name, value); } }
         public string Company { get { return Retrieve(x => x.Company); } set { Store(x => x.Company, value); } }
         public string UnitApartment { get { return Retrieve(x => x.UnitApartment); } set { Store(x => x.UnitApartment, value); } }
@@ -18,5 +19,10 @@ namespace Moov2.Orchard.Location.Models
         public string Longitude { get { return Retrieve(x => x.Longitude); } set { Store(x => x.Longitude, value); } }
 
         public bool ShowMap { get { return Retrieve(x => x.ShowMap); } set { Store(x => x.ShowMap, value); } }
+        #endregion
+
+        #region Public Methods
+
+        #endregion
     }
 }
