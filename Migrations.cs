@@ -23,13 +23,25 @@ namespace Moov2.Orchard.Location
 
                     .Column<string>("Latitude")
                     .Column<string>("Longitude")
+
+                    .Column<bool>("ShowMap", c => c.NotNull().WithDefault(false))
                 );
 
             ContentDefinitionManager.AlterPartDefinition("LocationPart", builder => builder
                 .WithDescription("Adds location fields to a content type.")
                 .Attachable());
 
-            return 1;
+            return 2;
+        }
+
+        public int UpdateFrom1()
+        {
+            SchemaBuilder.AlterTable("LocationPartRecord",
+                table => table
+                    .AddColumn<bool>("ShowMap", c => c.NotNull().WithDefault(false))
+            );
+
+            return 2;
         }
     }
 }

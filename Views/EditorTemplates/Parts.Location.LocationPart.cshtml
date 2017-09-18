@@ -79,3 +79,11 @@
     @Html.TextBoxFor(m => m.Longitude, new { @class = "text" })
     <span class="hint">@T("Longitude value (e.g. -0.115470.)")</span>
 </fieldset>
+
+<h3>@T("Map")</h3>
+
+<fieldset>
+    <label for="@Html.FieldIdFor(m => m.ShowMap)">@T("Show map")</label>
+    @Html.CheckBoxFor(m => m.ShowMap)
+    <span class="hint">@T("Show a map on the content item for this location (uses Latitude and Longitude values)")</span>
+</fieldset>

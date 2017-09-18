@@ -16,5 +16,7 @@ namespace Moov2.Orchard.Location.Models
 
         public string Latitude { get { return Retrieve(x => x.Latitude); } set { Store(x => x.Latitude, value); } }
         public string Longitude { get { return Retrieve(x => x.Longitude); } set { Store(x => x.Longitude, value); } }
+
+        public bool ShowMap { get { return Retrieve(x => x.ShowMap); } set { Store(x => x.ShowMap, value); } }
     }
 }

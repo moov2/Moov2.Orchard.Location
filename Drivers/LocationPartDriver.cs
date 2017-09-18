@@ -28,6 +28,7 @@ namespace Moov2.Orchard.Location.Drivers
             get { return "Location"; }
         }
         #endregion
+
         #region Display
         protected override DriverResult Display(LocationPart part, string displayType, dynamic shapeHelper)
         {
