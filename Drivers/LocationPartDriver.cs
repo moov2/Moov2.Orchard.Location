@@ -1,4 +1,5 @@
 ﻿using Moov2.Orchard.Location.Models;
+using Moov2.Orchard.Location.Services;
 using Moov2.Orchard.Location.ViewModels;
 using Orchard;
 using Orchard.ContentManagement;
@@ -14,12 +15,14 @@ namespace Moov2.Orchard.Location.Drivers
         #endregion
 
         #region Dependencies
+        private readonly IGeocodeService _geocodeService;
         private readonly IWorkContextAccessor _workContextAccessor;
         #endregion
 
         #region Constructor
-        public LocationPartDriver(IWorkContextAccessor workContextAccessor)
+        public LocationPartDriver(IGeocodeService geocodeService, IWorkContextAccessor workContextAccessor)
         {
+            _geocodeService = geocodeService;
             _workContextAccessor = workContextAccessor;
         }
         #endregion
@@ -58,7 +61,10 @@ namespace Moov2.Orchard.Location.Drivers
 
         protected override DriverResult Editor(LocationPart part, IUpdateModel updater, dynamic shapeHelper)
         {
-            updater.TryUpdateModel(part, Prefix, null, null);
+            if (updater.TryUpdateModel(part, Prefix, null, null))
+            {
+                part = _geocodeService.GeocodeIfRequired(part);
+            }
 
             return Editor(part, shapeHelper);
         }
@@ -81,6 +87,8 @@ namespace Moov2.Orchard.Location.Drivers
 
             context.ImportAttribute(part.PartDefinition.Name, "Latitude", x => part.Latitude = x);
             context.ImportAttribute(part.PartDefinition.Name, "Longitude", x => part.Longitude = x);
+
+            context.ImportAttribute(part.PartDefinition.Name, "ShowMap", x => part.ShowMap = true.ToString().Equals(x, System.StringComparison.InvariantCultureIgnoreCase));
         }
 
         protected override void Exporting(LocationPart part, ExportContentContext context)
@@ -98,6 +106,7 @@ namespace Moov2.Orchard.Location.Drivers
             context.Element(part.PartDefinition.Name).SetAttributeValue("Latitude", part.Latitude);
             context.Element(part.PartDefinition.Name).SetAttributeValue("Longitude", part.Longitude);
 
+            context.Element(part.PartDefinition.Name).SetAttributeValue("ShowMap", part.ShowMap);
         }
         #endregion
         #endregion
@@ -107,6 +116,12 @@ namespace Moov2.Orchard.Location.Drivers
         {
             var googleMapSettings = _workContextAccessor.GetContext().CurrentSite.As<GoogleMapSettingsPart>();
             return googleMapSettings?.ApiKey;
+        }
+
+        private bool ShouldGeocode()
+        {
+            var googleMapSettings = _workContextAccessor.GetContext().CurrentSite.As<GoogleMapSettingsPart>();
+            return googleMapSettings?.AutomaticGeocoding ?? false;
         }
 
         private bool ShouldRenderMap(LocationPart part)

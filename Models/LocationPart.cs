@@ -20,9 +20,5 @@ namespace Moov2.Orchard.Location.Models
 
         public bool ShowMap { get { return Retrieve(x => x.ShowMap); } set { Store(x => x.ShowMap, value); } }
         #endregion
-
-        #region Public Methods
-
-        #endregion
     }
 }

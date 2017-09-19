@@ -8,4 +8,9 @@
         @Html.TextBoxFor(m => m.ApiKey, new { @class = "text-long" })
         <span class="hint">@T("Google API Key used to show maps.")</span>
     </div>
+    <div>
+        @Html.CheckBoxFor(m => m.AutomaticGeocoding)
+        @Html.LabelFor(m => m.AutomaticGeocoding, T("Automatic Geocoding").ToString(), new { @class = "forcheckbox" })
+        <span class="hint">@T("Use automatic geocoding to populate blank coordinates on LocationPart with the Google Geocoding API.")</span>
+    </div>
 </fieldset>
