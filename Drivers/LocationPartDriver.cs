@@ -96,8 +96,8 @@ namespace Moov2.Orchard.Location.Drivers
             context.ImportAttribute(part.PartDefinition.Name, "CountyState", x => part.CountyState = x);
             context.ImportAttribute(part.PartDefinition.Name, "Country", x => part.Country = x);
 
-            context.ImportAttribute(part.PartDefinition.Name, "Latitude", x => part.Latitude = x);
-            context.ImportAttribute(part.PartDefinition.Name, "Longitude", x => part.Longitude = x);
+            context.ImportAttribute(part.PartDefinition.Name, "Latitude", x => part.Latitude = ParseNullableDouble(x));
+            context.ImportAttribute(part.PartDefinition.Name, "Longitude", x => part.Longitude = ParseNullableDouble(x));
 
             context.ImportAttribute(part.PartDefinition.Name, "ShowMap", x => part.ShowMap = true.ToString().Equals(x, System.StringComparison.InvariantCultureIgnoreCase));
             context.ImportAttribute(part.PartDefinition.Name, "ShowMapLink", x => part.ShowMapLink = true.ToString().Equals(x, System.StringComparison.InvariantCultureIgnoreCase));
@@ -131,6 +131,12 @@ namespace Moov2.Orchard.Location.Drivers
             return googleMapSettings?.ApiKey;
         }
 
+        private double? ParseNullableDouble(string value)
+        {
+            double parsed;
+            return double.TryParse(value, out parsed) ? parsed : (double?)null;
+        }
+
         private bool ShouldGeocode()
         {
             var googleMapSettings = _workContextAccessor.GetContext().CurrentSite.As<GoogleMapSettingsPart>();
@@ -139,14 +145,11 @@ namespace Moov2.Orchard.Location.Drivers
 
         private bool ShouldRenderMap(LocationPart part)
         {
-            float tester;
             return part != null &&
                 part.ShowMap &&
                 !string.IsNullOrWhiteSpace(GetApiKey()) &&
-                !string.IsNullOrWhiteSpace(part.Latitude) &&
-                !string.IsNullOrWhiteSpace(part.Longitude) &&
-                float.TryParse(part.Latitude, out tester) &&
-                float.TryParse(part.Longitude, out tester);
+                part.Latitude.HasValue &&
+                part.Longitude.HasValue;
         }
 
         private LocationMapViewModel ViewModelForMap(LocationPart part)

@@ -1,4 +1,5 @@
 ﻿using Orchard.ContentManagement;
+using System;
 
 namespace Moov2.Orchard.Location.Models
 {
@@ -15,8 +16,47 @@ namespace Moov2.Orchard.Location.Models
         public string CountyState { get { return Retrieve(x => x.CountyState); } set { Store(x => x.CountyState, value); } }
         public string Country { get { return Retrieve(x => x.Country); } set { Store(x => x.Country, value); } }
 
-        public string Latitude { get { return Retrieve(x => x.Latitude); } set { Store(x => x.Latitude, value); } }
-        public string Longitude { get { return Retrieve(x => x.Longitude); } set { Store(x => x.Longitude, value); } }
+        public double? Latitude
+        {
+            get
+            {
+                // Type was changed from string which causes a crash due to infoset caching...
+                try
+                {
+
+                    return Retrieve(x => x.Latitude);
+                }
+                catch (FormatException)
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                Store(x => x.Latitude, value);
+            }
+        }
+
+        public double? Longitude
+        {
+            get
+            {
+                // Type was changed from string which causes a crash due to infoset caching...
+                try
+                {
+                    return Retrieve(x => x.Longitude);
+
+                }
+                catch (FormatException)
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                Store(x => x.Longitude, value);
+            }
+        }
 
         public bool ShowMap { get { return Retrieve(x => x.ShowMap); } set { Store(x => x.ShowMap, value); } }
         public bool ShowMapLink { get { return Retrieve(x => x.ShowMapLink); } set { Store(x => x.ShowMapLink, value); } }

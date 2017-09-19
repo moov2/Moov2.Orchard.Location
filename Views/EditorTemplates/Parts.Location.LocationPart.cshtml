@@ -70,13 +70,13 @@
 
 <fieldset class="js-location-field-coords location-field location-admin--hidden">
     <label for="@Html.FieldIdFor(m => m.Latitude)">@T("Latitude")</label>
-    @Html.TextBoxFor(m => m.Latitude, new { @class = "text" })
+    @Html.EditorFor(m => m.Latitude, new { @class = "text" })
     <span class="hint">@T("Latitude value (e.g. 51.508885.)")</span>
 </fieldset>
 
 <fieldset class="js-location-field-coords location-field location-admin--hidden">
     <label for="@Html.FieldIdFor(m => m.Longitude)">@T("Longitude")</label>
-    @Html.TextBoxFor(m => m.Longitude, new { @class = "text" })
+    @Html.EditorFor(m => m.Longitude, new { @class = "text" })
     <span class="hint">@T("Longitude value (e.g. -0.115470.)")</span>
 </fieldset>
 

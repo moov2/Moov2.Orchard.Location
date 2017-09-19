@@ -21,8 +21,8 @@ namespace Moov2.Orchard.Location
                     .Column<string>("CountyState")
                     .Column<string>("Country")
 
-                    .Column<string>("Latitude")
-                    .Column<string>("Longitude")
+                    .Column<double>("Latitude", c => c.WithPrecision(9).WithScale(6))
+                    .Column<double>("Longitude", c => c.WithPrecision(9).WithScale(6))
 
                     .Column<bool>("ShowMap", c => c.NotNull().WithDefault(false))
                     .Column<bool>("ShowMapLink", c => c.NotNull().WithDefault(false))
@@ -32,7 +32,7 @@ namespace Moov2.Orchard.Location
                 .WithDescription("Adds location fields to a content type.")
                 .Attachable());
 
-            return 3;
+            return 4;
         }
 
         public int UpdateFrom1()
@@ -53,6 +53,21 @@ namespace Moov2.Orchard.Location
             );
 
             return 3;
+        }
+
+        public int UpdateFrom3()
+        {
+            SchemaBuilder.AlterTable("LocationPartRecord", table => table.DropColumn("Latitude"));
+            SchemaBuilder.AlterTable("LocationPartRecord", table => table.DropColumn("Longitude"));
+
+            SchemaBuilder.AlterTable("LocationPartRecord", table => table
+                     .AddColumn<double>("Latitude", c => c.Nullable().WithPrecision(9).WithScale(6))
+            );
+            SchemaBuilder.AlterTable("LocationPartRecord", table => table
+                     .AddColumn<double>("Longitude", c => c.Nullable().WithPrecision(9).WithScale(6))
+            );
+
+            return 4;
         }
     }
 }

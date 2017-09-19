@@ -22,8 +22,8 @@
 </script>
 
 <div class="location-map js-location-map--container" data-content-item-id="@Model.ContentItemId">
-    <input type="hidden" class="js-location-map--latitude" value="@Model.Latitude" />
-    <input type="hidden" class="js-location-map--longitude" value="@Model.Longitude" />
+    <input type="hidden" class="js-location-map--latitude" value="@Model.Latitude.ToString("0.000000")" />
+    <input type="hidden" class="js-location-map--longitude" value="@Model.Longitude.ToString("0.000000")" />
 
     <div class="location-map--map js-location-map--map">
     </div>

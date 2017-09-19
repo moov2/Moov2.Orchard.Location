@@ -10,9 +10,9 @@ namespace Moov2.Orchard.Location.Services
         {
             if (part == null)
                 return null;
-            if (!string.IsNullOrWhiteSpace(part.Latitude) && !string.IsNullOrWhiteSpace(part.Longitude))
+            if (part.Latitude.HasValue && part.Longitude.HasValue)
             {
-                return $"https://www.google.com/maps/search/{part.Latitude},{part.Longitude}";
+                return $"https://www.google.com/maps/search/{part.Latitude.Value.ToString("0.000000")},{part.Longitude.Value.ToString("0.000000")}";
             }
             var address = LocationUtilities.AddressForLocation(part).Replace(Environment.NewLine, ",");
             if (!string.IsNullOrWhiteSpace(address))

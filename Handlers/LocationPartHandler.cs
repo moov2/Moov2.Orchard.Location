@@ -16,14 +16,16 @@ namespace Moov2.Orchard.Location.Handlers
                     .Add(Constants.CompanyIndexPropertyName, locationPart.Company).Analyze().Store()
                     .Add(Constants.CountryIndexPropertyName, locationPart.Country).Analyze().Store()
                     .Add(Constants.CountyStateIndexPropertyName, locationPart.CountyState).Analyze().Store()
-                    .Add(Constants.LatitudeIndexPropertyName, locationPart.Latitude).Store()
-                    .Add(Constants.LongitudeIndexPropertyName, locationPart.Longitude).Store()
                     .Add(Constants.NameIndexPropertyName, locationPart.Name).Analyze().Store()
                     .Add(Constants.NameOrNumberIndexPropertyName, locationPart.NameOrNumber).Store()
                     .Add(Constants.PostcodeIndexPropertyName, locationPart.Postcode).Store()
                     .Add(Constants.StreetIndexPropertyName, locationPart.Street).Analyze().Store()
                     .Add(Constants.TownIndexPropertyName, locationPart.Town).Analyze().Store()
                     .Add(Constants.UnitApartmentIndexPropertyName, locationPart.UnitApartment).Store();
+                if (locationPart.Latitude.HasValue)
+                    context.DocumentIndex.Add(Constants.LatitudeIndexPropertyName, locationPart.Latitude.Value);
+                if (locationPart.Longitude.HasValue)
+                    context.DocumentIndex.Add(Constants.LongitudeIndexPropertyName, locationPart.Longitude.Value);
             });
         }
     }

@@ -28,9 +28,11 @@ namespace Moov2.Orchard.Location.Services
             if (part == null || string.IsNullOrWhiteSpace(GetApiKey()))
                 return part;
             // Don't geocode if we already have coordinate values
-            if (!string.IsNullOrWhiteSpace(part.Latitude) || !string.IsNullOrWhiteSpace(part.Longitude))
+            if (part.Latitude.HasValue && part.Longitude.HasValue)
                 return part;
             var address = LocationUtilities.AddressForLocation(part);
+            if (string.IsNullOrWhiteSpace(address))
+                return part;
             var response = GoogleMaps.Geocode.Query(new GeocodingRequest
             {
                 Address = address,
@@ -40,8 +42,8 @@ namespace Moov2.Orchard.Location.Services
             if (response.Status == Status.OK)
             {
                 var result = response.Results.First();
-                part.Latitude = result.Geometry.Location.Latitude.ToString();
-                part.Longitude = result.Geometry.Location.Longitude.ToString();
+                part.Latitude = result.Geometry.Location.Latitude;
+                part.Longitude = result.Geometry.Location.Longitude;
             }
             return part;
         }

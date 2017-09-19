@@ -14,8 +14,8 @@ namespace Moov2.Orchard.Location.Models
         public virtual string CountyState { get; set; }
         public virtual string Country { get; set; }
 
-        public virtual string Latitude { get; set; }
-        public virtual string Longitude { get; set; }
+        public virtual double? Latitude { get; set; }
+        public virtual double? Longitude { get; set; }
 
         public virtual bool ShowMap { get; set; }
         public virtual bool ShowMapLink { get; set; }
