@@ -1,0 +1,37 @@
+﻿@using Moov2.Orchard.Location.Models
+
+@{
+    var location = (LocationPart)Model.ContentPart;
+}
+
+
+@if (!string.IsNullOrWhiteSpace(location.Country) || !string.IsNullOrWhiteSpace(location.Town) || !string.IsNullOrWhiteSpace(location.Company))
+{
+    <span class="location--summary">
+        @if (!string.IsNullOrWhiteSpace(location.Country))
+        {
+            if (!string.IsNullOrWhiteSpace(location.Town))
+            {
+                @(location.Town)<text>, </text>@(location.Country)
+            }
+            else
+            {
+                @location.Country
+            }
+        }
+        else if (!string.IsNullOrWhiteSpace(location.Company))
+        {
+            if (!string.IsNullOrWhiteSpace(location.Town))
+            {
+                @location.Company<text>, </text>@location.Town
+            }
+            else{
+                @location.Company
+            }
+        }
+        else if (!string.IsNullOrWhiteSpace(location.Town))
+        {
+            @location.Town
+        }
+    </span>
+}

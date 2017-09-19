@@ -1,4 +1,5 @@
 ﻿using Moov2.Orchard.Location.Models;
+using System;
 using System.Text;
 
 namespace Moov2.Orchard.Location.Utilities
@@ -53,6 +54,12 @@ namespace Moov2.Orchard.Location.Utilities
                 addressBuilder.AppendLine(location.Country);
             }
             return addressBuilder.ToString();
+        }
+
+        public static string AddressForLocationWeb(LocationPart location)
+        {
+            var address = AddressForLocation(location);
+            return address.Replace(Environment.NewLine, "<br/>");
         }
     }
 }

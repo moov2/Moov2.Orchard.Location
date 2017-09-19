@@ -1,1 +1,13 @@
-﻿Location
+﻿@using Moov2.Orchard.Location.Utilities
+@using Moov2.Orchard.Location.Models
+
+@{
+    var address = LocationUtilities.AddressForLocationWeb((LocationPart)Model.ContentPart);
+}
+
+@if (!string.IsNullOrWhiteSpace(address))
+{
+    <div class="location-part--address">
+        @Html.Raw(address)
+    </div>
+}

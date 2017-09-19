@@ -1,23 +1,30 @@
 ﻿<Placement>
-  <!-- available display shapes -->
 
+  <!-- edit shapes -->
+  <Place Parts_Location_Edit="Content:10"/>
+  
+  <!-- available display shapes -->
   <!--
   Parts_Location
+  Parts_Location_Map
+  Parts_Location_Summary
+  Parts_Location_MapLink
   -->
-
-  <Place Parts_Location_Edit="Content:10"/>
-
   <Place Parts_Location="-"/>
+  <Place Parts_Location_Summary="-"/>
   <Place Parts_Location_Map="-"/>
   <Place Parts_Location_MapLink="-"/>
 
+  <!-- Summary -->
   <Match DisplayType="Summary">
+    <Place Parts_Location_Summary="Meta:10"/>
     <Place Parts_Location_MapLink="Meta:11"/>
   </Match>
 
+  <!-- Detail -->
   <Match DisplayType="Detail">
-    <Place Parts_Location="Meta:10"/>
+    <Place Parts_Location="Content:1"/>
+    <Place Parts_Location_MapLink="Content:2"/>
     <Place Parts_Location_Map="Content:10"/>
-    <Place Parts_Location_MapLink="Content:11"/>
   </Match>
 </Placement>

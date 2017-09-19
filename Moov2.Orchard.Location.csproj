@@ -138,6 +138,7 @@
     <Content Include="Views\Parts.Location.cshtml" />
     <Content Include="Views\Parts.Location.Map.cshtml" />
     <Content Include="Views\Parts.Location.MapLink.cshtml" />
+    <Content Include="Views\Parts.Location.Summary.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

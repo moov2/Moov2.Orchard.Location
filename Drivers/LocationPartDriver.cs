@@ -43,6 +43,7 @@ namespace Moov2.Orchard.Location.Drivers
         {
             var results = new List<DriverResult>();
             results.Add(ContentShape("Parts_Location", () => shapeHelper.Parts_Location(part)));
+            results.Add(ContentShape("Parts_Location_Summary", () => shapeHelper.Parts_Location_Summary(part)));
             if (ShouldRenderMap(part))
             {
                 results.Add(ContentShape("Parts_Location_Map", () => shapeHelper.Parts_Location_Map(ViewModelForMap(part))));
