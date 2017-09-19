@@ -1,17 +1,23 @@
 ﻿<Placement>
   <!-- available display shapes -->
-  
+
   <!--
   Parts_Location
   -->
-  
+
   <Place Parts_Location_Edit="Content:10"/>
 
   <Place Parts_Location="-"/>
   <Place Parts_Location_Map="-"/>
+  <Place Parts_Location_MapLink="-"/>
+
+  <Match DisplayType="Summary">
+    <Place Parts_Location_MapLink="Meta:11"/>
+  </Match>
 
   <Match DisplayType="Detail">
     <Place Parts_Location="Meta:10"/>
     <Place Parts_Location_Map="Content:10"/>
+    <Place Parts_Location_MapLink="Content:11"/>
   </Match>
 </Placement>

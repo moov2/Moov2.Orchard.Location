@@ -19,6 +19,7 @@ namespace Moov2.Orchard.Location.Models
         public string Longitude { get { return Retrieve(x => x.Longitude); } set { Store(x => x.Longitude, value); } }
 
         public bool ShowMap { get { return Retrieve(x => x.ShowMap); } set { Store(x => x.ShowMap, value); } }
+        public bool ShowMapLink { get { return Retrieve(x => x.ShowMapLink); } set { Store(x => x.ShowMapLink, value); } }
         #endregion
     }
 }

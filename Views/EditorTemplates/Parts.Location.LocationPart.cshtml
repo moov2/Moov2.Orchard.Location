@@ -87,3 +87,9 @@
     <label for="@Html.FieldIdFor(m => m.ShowMap)" class="forcheckbox">@T("Show map")</label>
     <span class="hint">@T("Show a map on the content item for this location (uses Latitude and Longitude values)")</span>
 </fieldset>
+
+<fieldset>
+    @Html.CheckBoxFor(m => m.ShowMapLink)
+    <label for="@Html.FieldIdFor(m => m.ShowMapLink)" class="forcheckbox">@T("Show map link")</label>
+    <span class="hint">@T("Show a link to an external map on the content item for this location (uses Latitude and Longitude values)")</span>
+</fieldset>

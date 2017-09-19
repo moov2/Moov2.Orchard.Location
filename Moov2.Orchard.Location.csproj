@@ -91,8 +91,11 @@
     <Compile Include="Search\ILocationSearchParameters.cs" />
     <Compile Include="Search\LocationSearchHelpers.cs" />
     <Compile Include="Services\GoogleGeocodeService.cs" />
+    <Compile Include="Services\GoogleMapUrlService.cs" />
     <Compile Include="Services\IGeocodeService.cs" />
+    <Compile Include="Services\IMapUrlService.cs" />
     <Compile Include="Utilities\LocationUtilities.cs" />
+    <Compile Include="ViewModels\LocationMapLinkViewModel.cs" />
     <Compile Include="ViewModels\LocationMapViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -134,6 +137,7 @@
     <None Include="Views\EditorTemplates\Parts.Location.LocationPart.cshtml" />
     <Content Include="Views\Parts.Location.cshtml" />
     <Content Include="Views\Parts.Location.Map.cshtml" />
+    <Content Include="Views\Parts.Location.MapLink.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

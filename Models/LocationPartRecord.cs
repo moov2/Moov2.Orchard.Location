@@ -18,5 +18,6 @@ namespace Moov2.Orchard.Location.Models
         public virtual string Longitude { get; set; }
 
         public virtual bool ShowMap { get; set; }
+        public virtual bool ShowMapLink { get; set; }
     }
 }

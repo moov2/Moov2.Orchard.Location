@@ -5,6 +5,7 @@ using Orchard;
 using Orchard.ContentManagement;
 using Orchard.ContentManagement.Drivers;
 using Orchard.ContentManagement.Handlers;
+using System.Collections.Generic;
 
 namespace Moov2.Orchard.Location.Drivers
 {
@@ -16,13 +17,15 @@ namespace Moov2.Orchard.Location.Drivers
 
         #region Dependencies
         private readonly IGeocodeService _geocodeService;
+        private readonly IMapUrlService _mapUrlService;
         private readonly IWorkContextAccessor _workContextAccessor;
         #endregion
 
         #region Constructor
-        public LocationPartDriver(IGeocodeService geocodeService, IWorkContextAccessor workContextAccessor)
+        public LocationPartDriver(IGeocodeService geocodeService, IMapUrlService mapUrlService, IWorkContextAccessor workContextAccessor)
         {
             _geocodeService = geocodeService;
+            _mapUrlService = mapUrlService;
             _workContextAccessor = workContextAccessor;
         }
         #endregion
@@ -38,18 +41,24 @@ namespace Moov2.Orchard.Location.Drivers
         #region Display
         protected override DriverResult Display(LocationPart part, string displayType, dynamic shapeHelper)
         {
-            var locationShape = ContentShape("Parts_Location", () => shapeHelper.Parts_Location(part));
+            var results = new List<DriverResult>();
+            results.Add(ContentShape("Parts_Location", () => shapeHelper.Parts_Location(part)));
             if (ShouldRenderMap(part))
             {
-                return Combined(
-                        locationShape,
-                        ContentShape("Parts_Location_Map", () => shapeHelper.Parts_Location_Map(ViewModelForMap(part)))
-                    );
+                results.Add(ContentShape("Parts_Location_Map", () => shapeHelper.Parts_Location_Map(ViewModelForMap(part))));
             }
-            else
+            if (part.ShowMapLink)
             {
-                return locationShape;
+                results.Add(ContentShape("Parts_Location_MapLink", () =>
+                    shapeHelper.Parts_Location_MapLink(
+                        new LocationMapLinkViewModel
+                        {
+                            MapUrl = _mapUrlService.GetMapUrl(part)
+                        })
+                    )
+                );
             }
+            return Combined(results.ToArray());
         }
         #endregion
 
@@ -63,7 +72,8 @@ namespace Moov2.Orchard.Location.Drivers
         {
             if (updater.TryUpdateModel(part, Prefix, null, null))
             {
-                part = _geocodeService.GeocodeIfRequired(part);
+                if (ShouldGeocode())
+                    part = _geocodeService.GeocodeIfRequired(part);
             }
 
             return Editor(part, shapeHelper);
@@ -89,6 +99,7 @@ namespace Moov2.Orchard.Location.Drivers
             context.ImportAttribute(part.PartDefinition.Name, "Longitude", x => part.Longitude = x);
 
             context.ImportAttribute(part.PartDefinition.Name, "ShowMap", x => part.ShowMap = true.ToString().Equals(x, System.StringComparison.InvariantCultureIgnoreCase));
+            context.ImportAttribute(part.PartDefinition.Name, "ShowMapLink", x => part.ShowMapLink = true.ToString().Equals(x, System.StringComparison.InvariantCultureIgnoreCase));
         }
 
         protected override void Exporting(LocationPart part, ExportContentContext context)
@@ -107,6 +118,7 @@ namespace Moov2.Orchard.Location.Drivers
             context.Element(part.PartDefinition.Name).SetAttributeValue("Longitude", part.Longitude);
 
             context.Element(part.PartDefinition.Name).SetAttributeValue("ShowMap", part.ShowMap);
+            context.Element(part.PartDefinition.Name).SetAttributeValue("ShowMapLink", part.ShowMapLink);
         }
         #endregion
         #endregion
