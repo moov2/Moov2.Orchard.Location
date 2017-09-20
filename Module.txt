@@ -2,7 +2,7 @@
 AntiForgery: enabled
 Author: Moov2
 Website: https://github.com/moov2/Moov2.Orchard.Location
-Version: 0.1
+Version: 0.3
 OrchardVersion: 1.10.2
 Category: Content
 Description: Adds location fields to content types.
