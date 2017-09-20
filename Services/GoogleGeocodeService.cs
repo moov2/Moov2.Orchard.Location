@@ -5,6 +5,7 @@ using Moov2.Orchard.Location.Models;
 using Moov2.Orchard.Location.Utilities;
 using Orchard;
 using Orchard.ContentManagement;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Moov2.Orchard.Location.Services
@@ -23,6 +24,26 @@ namespace Moov2.Orchard.Location.Services
         #endregion
 
         #region IGeocodeService Implementation
+        public IList<LocationResult> Geocode(string term)
+        {
+            var results = new List<LocationResult>();
+            if (string.IsNullOrWhiteSpace(term) || string.IsNullOrWhiteSpace(GetApiKey()))
+                return results;
+            var response = GoogleMaps.Geocode.Query(new GeocodingRequest
+            {
+                Address = term,
+                ApiKey = GetApiKey(),
+                Sensor = false
+            });
+            if (response.Status != Status.OK)
+                return results;
+            results.AddRange(response.Results.Select(x => new LocationResult {
+                Latitude = x.Geometry.Location.Latitude,
+                Longitude = x.Geometry.Location.Longitude
+            }));
+            return results;
+        }
+
         public LocationPart GeocodeIfRequired(LocationPart part)
         {
             if (part == null || string.IsNullOrWhiteSpace(GetApiKey()))
@@ -31,20 +52,12 @@ namespace Moov2.Orchard.Location.Services
             if (part.Latitude.HasValue && part.Longitude.HasValue)
                 return part;
             var address = LocationUtilities.AddressForLocation(part);
-            if (string.IsNullOrWhiteSpace(address))
+            var results = Geocode(address);
+            if (!results.Any())
                 return part;
-            var response = GoogleMaps.Geocode.Query(new GeocodingRequest
-            {
-                Address = address,
-                ApiKey = GetApiKey(),
-                Sensor = false
-            });
-            if (response.Status == Status.OK)
-            {
-                var result = response.Results.First();
-                part.Latitude = result.Geometry.Location.Latitude;
-                part.Longitude = result.Geometry.Location.Longitude;
-            }
+            var result = results.First();
+            part.Latitude = result.Latitude;
+            part.Longitude = result.Longitude;
             return part;
         }
         #endregion

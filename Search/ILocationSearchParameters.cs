@@ -10,5 +10,9 @@
         string Town { get; set; }
         string CountyState { get; set; }
         string Country { get; set; }
+
+        double? Longitude { get; set; }
+        double? Latitude { get; set; }
+        double? Radius { get; set; }
     }
 }

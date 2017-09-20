@@ -84,6 +84,7 @@
     <Compile Include="Handlers\LocationPartHandler.cs" />
     <Compile Include="Migrations.cs" />
     <Compile Include="Models\GoogleMapSettingsPart.cs" />
+    <Compile Include="Models\LocationResult.cs" />
     <Compile Include="Models\LocationPart.cs" />
     <Compile Include="Models\LocationPartRecord.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
