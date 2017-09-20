@@ -90,7 +90,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResourceManifest.cs" />
     <Compile Include="Search\ILocationSearchParameters.cs" />
-    <Compile Include="Search\LocationSearchHelpers.cs" />
+    <Compile Include="Search\SearchBuilderExtensions.cs" />
     <Compile Include="Services\GoogleGeocodeService.cs" />
     <Compile Include="Services\GoogleMapUrlService.cs" />
     <Compile Include="Services\IGeocodeService.cs" />
