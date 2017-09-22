@@ -134,8 +134,8 @@
     </Content>
     <Content Include="Assets\less\orchard.location.less" />
     <Content Include="packages.config" />
-    <None Include="Views\EditorTemplates\Parts.Location.GoogleMapSettings.cshtml" />
-    <None Include="Views\EditorTemplates\Parts.Location.LocationPart.cshtml" />
+    <Content Include="Views\EditorTemplates\Parts.Location.GoogleMapSettings.cshtml" />
+    <Content Include="Views\EditorTemplates\Parts.Location.LocationPart.cshtml" />
     <Content Include="Views\Parts.Location.cshtml" />
     <Content Include="Views\Parts.Location.Map.cshtml" />
     <Content Include="Views\Parts.Location.MapLink.cshtml" />
