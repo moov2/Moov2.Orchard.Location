@@ -6,9 +6,11 @@
     Style.Require("LocationAdminStyle");
 }
 
+<hr />
+
 <h2>@T("Location")</h2>
 
-<a href="#" class="js-show-location-all">@T("Click to show all")</a>
+<a href="#" class="js-show-location-all">@T("Click to show all fields")</a>
 
 <fieldset class="js-location-field location-field @(string.IsNullOrEmpty(Model.Name) ? "location-admin--hidden" : "")">
     <label for="@Html.FieldIdFor(m => m.Name)">@T("Name")</label>
@@ -93,3 +95,5 @@
     <label for="@Html.FieldIdFor(m => m.ShowMapLink)" class="forcheckbox">@T("Show map link")</label>
     <span class="hint">@T("Show a link to an external map on the content item for this location (uses Latitude and Longitude values)")</span>
 </fieldset>
+
+<hr />

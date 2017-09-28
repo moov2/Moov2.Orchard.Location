@@ -1,7 +1,7 @@
 ﻿<Placement>
 
   <!-- edit shapes -->
-  <Place Parts_Location_Edit="Content:10"/>
+  <Place Parts_Location_Edit="Content:4"/>
   
   <!-- available display shapes -->
   <!--
