@@ -1,5 +1,6 @@
 ﻿using Moov2.Orchard.Location.Models;
 using Orchard.Indexing;
+using System.Collections.Generic;
 
 namespace Moov2.Orchard.Location.Search
 {
@@ -15,16 +16,29 @@ namespace Moov2.Orchard.Location.Search
             return searchBuilder;
         }
 
-        public static ISearchBuilder SetSpacialQuery(this ISearchBuilder searchBuilder, double latitude, double longitude, double radius)
+        public static ISearchBuilder SetSpacialQuery(this ISearchBuilder searchBuilder, double latitude, double longitude, double radius, float weighting, bool mandatory)
         {
-            searchBuilder = searchBuilder.WithinRange(Constants.LatitudeIndexPropertyName, latitude - radius, latitude + radius).Mandatory();
-            searchBuilder = searchBuilder.WithinRange(Constants.LongitudeIndexPropertyName, longitude - radius, longitude + radius).Mandatory();
+            searchBuilder = searchBuilder.WithinRange(Constants.LatitudeIndexPropertyName, latitude - radius, latitude + radius).Weighted(weighting);
+            if (mandatory)
+                searchBuilder = searchBuilder.Mandatory();
+            searchBuilder = searchBuilder.WithinRange(Constants.LongitudeIndexPropertyName, longitude - radius, longitude + radius).Weighted(weighting);
+            if (mandatory)
+                searchBuilder = searchBuilder.Mandatory();
             return searchBuilder;
         }
 
-        public static ISearchBuilder SetSpacialQuery(this ISearchBuilder searchBuilder, LocationResult location, double radius)
+        public static ISearchBuilder SetSpacialQuery(this ISearchBuilder searchBuilder, LocationResult location, double radius, float weighting, bool mandatory)
         {
-            return searchBuilder.SetSpacialQuery(location.Latitude, location.Longitude, radius);
+            return searchBuilder.SetSpacialQuery(location.Latitude, location.Longitude, radius, weighting, mandatory);
+        }
+
+        public static ISearchBuilder SetSpacialQuery(this ISearchBuilder searchBuilder, IList<LocationResult> results, double radius, float weighting)
+        {
+            foreach (var location in results)
+            {
+                searchBuilder = searchBuilder.SetSpacialQuery(location.Latitude, location.Longitude, radius, weighting, false);
+            }
+            return searchBuilder;
         }
 
         public static ISearchBuilder SetLocationParameters(this ISearchBuilder searchBuilder, ILocationSearchParameters parameters)
@@ -40,11 +54,6 @@ namespace Moov2.Orchard.Location.Search
             searchBuilder = SetFieldQuery(Constants.TownIndexPropertyName, parameters.Town, searchBuilder);
             searchBuilder = SetFieldQuery(Constants.CountyStateIndexPropertyName, parameters.CountyState, searchBuilder);
             searchBuilder = SetFieldQuery(Constants.CountryIndexPropertyName, parameters.Country, searchBuilder);
-
-            if (parameters.Latitude.HasValue && parameters.Longitude.HasValue)
-            {
-                searchBuilder = searchBuilder.SetSpacialQuery(parameters.Latitude.Value, parameters.Longitude.Value, parameters.Radius.HasValue ? parameters.Radius.Value : 1.0);
-            }
 
             return searchBuilder;
         }

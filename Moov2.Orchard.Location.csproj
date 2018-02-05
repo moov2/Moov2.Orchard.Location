@@ -80,9 +80,11 @@
   <ItemGroup>
     <Compile Include="Constants.cs" />
     <Compile Include="Drivers\LocationPartDriver.cs" />
+    <Compile Include="Handlers\LocationSearchSettingsPartHandler.cs" />
     <Compile Include="Handlers\GoogleMapSettingsPartHandler.cs" />
     <Compile Include="Handlers\LocationPartHandler.cs" />
     <Compile Include="Migrations.cs" />
+    <Compile Include="Models\LocationSearchSettingsPart.cs" />
     <Compile Include="Models\GoogleMapSettingsPart.cs" />
     <Compile Include="Models\LocationResult.cs" />
     <Compile Include="Models\LocationPart.cs" />
@@ -95,6 +97,7 @@
     <Compile Include="Services\GoogleMapUrlService.cs" />
     <Compile Include="Services\IGeocodeService.cs" />
     <Compile Include="Services\IMapUrlService.cs" />
+    <Compile Include="Services\LocationSearchService.cs" />
     <Compile Include="Utilities\LocationUtilities.cs" />
     <Compile Include="ViewModels\LocationMapLinkViewModel.cs" />
     <Compile Include="ViewModels\LocationMapViewModel.cs" />
@@ -124,7 +127,9 @@
       <Private>false</Private>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Views\EditorTemplates\Parts.Location.LocationSearchSettings.cshtml" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Placement.info" />
     <Content Include="Assets.json" />

@@ -1,0 +1,21 @@
+﻿@model Moov2.Orchard.Location.Models.LocationSearchSettingsPart
+
+<fieldset>
+    <legend>@T("Location search settings")</legend>
+    <p>@T("Configure your location search settings below to change how the location features are applied to compatible location search routes.")</p>
+    <div>
+        @Html.CheckBoxFor(m => m.UseSpacialSearch)
+        @Html.LabelFor(m => m.UseSpacialSearch, T("Use spacial search").ToString(), new { @class = "forcheckbox" })
+        <span class="hint">@T("Use spacial search filters with compatible location search.")</span>
+    </div>
+    <div>
+        @Html.LabelFor(m => m.DefaultRadius, T("Default spacial search radius (km)").ToString(), new { @class = "" })
+        @Html.EditorFor(m => m.DefaultRadius)
+        <span class="hint">@T("Default radius to use for spacial searches, results are shown for entries within this number of kilometers of geo matching on the search terms.")</span>
+    </div>
+    <div>
+        @Html.LabelFor(m => m.DefaultWeighting, T("Default spacial search weighting").ToString(), new { @class = "" })
+        @Html.EditorFor(m => m.DefaultWeighting)
+        <span class="hint">@T("Default weighting to apply for spacial searches, weights above 1 apply more importance to spacial feature, below reduces importance.")</span>
+    </div>
+</fieldset>
