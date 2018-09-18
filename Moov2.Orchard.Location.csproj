@@ -25,6 +25,7 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -98,6 +99,7 @@
     <Compile Include="Services\IGeocodeService.cs" />
     <Compile Include="Services\IMapUrlService.cs" />
     <Compile Include="Services\LocationSearchService.cs" />
+    <Compile Include="Services\MissingSettingsBanner.cs" />
     <Compile Include="Utilities\LocationUtilities.cs" />
     <Compile Include="ViewModels\LocationMapLinkViewModel.cs" />
     <Compile Include="ViewModels\LocationMapViewModel.cs" />
